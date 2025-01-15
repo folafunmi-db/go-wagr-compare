@@ -28,9 +28,9 @@ export default function ComparePage() {
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="flex flex-wrap-reverse items-center gap-1 text-lg md:text-2xl font-bold text-gray-900">
             <Link href={"/"}>
-              <button className="mr-2 py-1 px-2 text-sm bg-gray-200 rounded-md hover:bg-gray-300">
+              <button className="py-1 px-2 text-sm bg-gray-200 rounded-md hover:bg-gray-300">
                 Go back
               </button>
             </Link>
