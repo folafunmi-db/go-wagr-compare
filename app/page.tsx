@@ -1,4 +1,9 @@
-import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignOutButton,
+} from "@clerk/nextjs";
 import Link from "next/link";
 
 export default async function Home() {
@@ -10,12 +15,20 @@ export default async function Home() {
         </SignInButton>
       </SignedOut>
       <SignedIn>
-        <span className="text-sm ">
-          You are already signed in.{" "}
-          <Link href={"/compare"} className="underline text-blue-600">
-            Go to compare page
-          </Link>
-        </span>
+        <div className="flex flex-col justify-center items-center gap-2">
+          <span className="text-sm ">
+            You are already signed in.{" "}
+            <Link href={"/compare"} className="underline text-blue-600">
+              Go to compare page
+            </Link>
+          </span>{" "}
+          <span className="text-sm ">
+            or{" "}
+            <SignOutButton>
+              <button className="underline text-blue-600">Sign out</button>
+            </SignOutButton>
+          </span>
+        </div>
       </SignedIn>
     </div>
   );
