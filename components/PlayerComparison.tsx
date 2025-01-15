@@ -10,9 +10,13 @@ interface PlayerComparisonProps {
   onPlayerRemove: (id: number) => void;
 }
 
-export default function PlayerComparison({ players, onPlayerRemove }: PlayerComparisonProps) {
+export default function PlayerComparison({
+  players,
+  onPlayerRemove,
+}: PlayerComparisonProps) {
   const [selectedSeason, setSelectedSeason] = useState<Season>("2023-2024");
-  const [selectedCompetition, setSelectedCompetition] = useState<Competition>("Champions League");
+  const [selectedCompetition, setSelectedCompetition] =
+    useState<Competition>("Champions League");
 
   const getPlayerStats = (player: Player): PlayerScore => {
     const seasonStats = player.statsBySeason[selectedSeason];
@@ -32,14 +36,14 @@ export default function PlayerComparison({ players, onPlayerRemove }: PlayerComp
 
   const getRecentForm = (player: Player) => {
     return player.statsBySeason[selectedSeason].recentMatches
-      .filter(match => match.competition === selectedCompetition)
+      .filter((match) => match.competition === selectedCompetition)
       .slice(0, 5);
   };
 
   return (
     <div className="bg-white rounded-lg shadow">
       <div className="p-6 border-b">
-        <div className="flex gap-4 mb-4">
+        <div className="flex flex-wrap gap-4 mb-4">
           <select
             value={selectedSeason}
             onChange={(e) => setSelectedSeason(e.target.value as Season)}
@@ -52,7 +56,9 @@ export default function PlayerComparison({ players, onPlayerRemove }: PlayerComp
 
           <select
             value={selectedCompetition}
-            onChange={(e) => setSelectedCompetition(e.target.value as Competition)}
+            onChange={(e) =>
+              setSelectedCompetition(e.target.value as Competition)
+            }
             className="p-2 border rounded-md"
           >
             <option value="Champions League">Champions League</option>
@@ -63,7 +69,7 @@ export default function PlayerComparison({ players, onPlayerRemove }: PlayerComp
           </select>
         </div>
 
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
           {players.map((player) => {
             const stats = getPlayerStats(player);
             const recentForm = getRecentForm(player);
@@ -91,7 +97,9 @@ export default function PlayerComparison({ players, onPlayerRemove }: PlayerComp
                       <div className="text-sm text-gray-500">Player Score</div>
                     </div>
                     <div className="text-center p-3 bg-gray-50 rounded-lg">
-                      <div className="text-2xl font-bold">{stats.appearances}</div>
+                      <div className="text-2xl font-bold">
+                        {stats.appearances}
+                      </div>
                       <div className="text-sm text-gray-500">Appearances</div>
                     </div>
                     <div className="text-center p-3 bg-gray-50 rounded-lg">
@@ -107,7 +115,10 @@ export default function PlayerComparison({ players, onPlayerRemove }: PlayerComp
                   <h4 className="font-semibold mb-2">Recent Form</h4>
                   <div className="space-y-2">
                     {recentForm.map((match, index) => (
-                      <div key={index} className="text-sm p-2 bg-gray-50 rounded">
+                      <div
+                        key={index}
+                        className="text-sm p-2 bg-gray-50 rounded"
+                      >
                         <div className="flex justify-between mb-1">
                           <span>{match.opponent}</span>
                           <span>
@@ -129,3 +140,4 @@ export default function PlayerComparison({ players, onPlayerRemove }: PlayerComp
     </div>
   );
 }
+

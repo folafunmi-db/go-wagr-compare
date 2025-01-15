@@ -1,18 +1,22 @@
-import { SignedOut, SignInButton } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import Link from "next/link";
 
 export default async function Home() {
-  const { userId } = await auth();
-
-  if (!userId) {
-    return (
+  return (
+    <div className="flex justify-center items-center min-h-[100svh]">
       <SignedOut>
-        <SignInButton />
+        <SignInButton>
+          <button className="signin-button">Click to Sign In</button>
+        </SignInButton>
       </SignedOut>
-    );
-  }
-
-  redirect("/compare");
+      <SignedIn>
+        <span className="text-sm ">
+          You are already signed in.{" "}
+          <Link href={"/compare"} className="underline text-blue-600">
+            Go to compare page
+          </Link>
+        </span>
+      </SignedIn>
+    </div>
+  );
 }
-
